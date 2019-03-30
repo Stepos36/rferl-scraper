@@ -18,24 +18,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rferl" ;
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-require("./routes/api_routes/scraping")(app);
+require("./routes/api_routes/scraping")(app, axios, cheerio);
 
-axios.get("https://www.rferl.org/").then(function(response) {
-
-  var $ = cheerio.load(response.data);
-  var results = [];
-
-  $(".media-block-wrap .content a").each(function(i, element) {
-    var title = $(element).children().text();
-    var link = $(element).attr("href");
-
-    results.push({
-      title: title.replace(/\n/g,""),
-      link: 'https://rferl.org'+link
-    });
-  });
-  console.log(results);
-});
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
