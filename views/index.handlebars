@@ -1,0 +1,14 @@
+<h1 class="text-center text-white">Welcome to Radio Freedom news scraper!</h1>
+<br/>
+<div class="container main-container">
+    <div id="articles">
+        <ul>
+            {{#each article}}
+			    <li>
+                    <p><h4>{{this.title}}</h4></p>
+                    <p>{{this.link}}</p>
+			    </li>
+		    {{/each}}
+        </ul>
+    </div>
+</div>
