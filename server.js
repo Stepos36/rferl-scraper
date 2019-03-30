@@ -18,7 +18,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rferl" ;
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-require("./routes/api_routes/scraping")(app, axios, cheerio);
+require("./routes/api_routes/scraping")(app, axios, cheerio, db);
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
