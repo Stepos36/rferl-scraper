@@ -17,4 +17,18 @@ module.exports = function(app, axios, cheerio, db) {
           res.send("Scrape is Complete");
         });
       });
+    
+    app.post('/article-full', function(req, res) {
+      var link = req.body.link
+      axios.get(link).then(function(response) {  
+        var $ = cheerio.load(response.data);
+        var result = [];
+        $(".wsw p").each(function(i, element) {
+            var text = $(element).text()
+            result.push(text)
+            console.log(result)
+        });
+        res.send(result)
+        });
+    })
 }

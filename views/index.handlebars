@@ -2,13 +2,75 @@
 <br/>
 <div class="container main-container">
     <div id="articles">
-        <ul>
-            {{#each article}}
-			    <li>
-                    <p><h4>{{this.title}}</h4></p>
-                    <p>{{this.link}}</p>
-			    </li>
-		    {{/each}}
-        </ul>
+        <table id="articlesTable" class="cell-border compact stripe">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>Article name</th>
+                    <th>Article link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each article}}
+			    <tr data-id={{this.link}}>
+                    <td class="details-control">+</td>
+                    <td><h6>{{this.title}}</h6></td>
+                    <td><a href='{{this.link}}'>go to RadioFreedom</a></td>
+			    </tr>
+		        {{/each}}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th> </th>
+                    <th>Article name</th>
+                    <th>Article link</th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
+<script>
+    $(document).ready( function () {
+        $('#articlesTable').DataTable( {
+            responsive: true
+        } );
+        
+        var table = $('#articlesTable').DataTable();
+
+        $('#articlesTable tbody').on('click', '.details-control', function () {
+            var tr = $(this).parents('tr');
+            var row = table.row( tr );
+            $.ajax({
+                url: "/article-full",
+                method: "POST",
+                data: {
+                    link: tr.attr('data-id')
+                }
+            }).then(function(response){
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row (the format() function would return the data to be shown)
+                    if(row.child() && row.child().length)
+                    {
+                        row.child.show();
+                    }
+                    else {
+                        var text = []
+                        for(var i=0;i<response.length;i++) {
+                            text.push(response[i])
+                        }
+                        row.child(text).show();
+                    }
+                    tr.addClass('shown');
+                }
+            })
+
+
+            
+        } );
+    } );
+</script>
