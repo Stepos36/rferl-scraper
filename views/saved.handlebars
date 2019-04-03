@@ -19,7 +19,7 @@
                     <td><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}</td>
                     <td>{{this.readingTime}}</td>
                     <td>{{this.time}}</td>
-                    <td><button class="button-green save" id={{this._id}}>Save</button></td>
+                    <td><button class="button-red delete" id={{this._id}}>Delete</button></td>
 			    </tr>
 		        {{/each}}
             </tbody>
@@ -87,16 +87,16 @@
                 }
             })
         });
-        $(document).on('click', '.save', function() {
+        $(document).on('click', '.delete', function() {
                 $.ajax({
-                url: "/save-article/"+$(this).attr('id'),
+                url: "/delete-article/"+$(this).attr('id'),
                 method: "PUT",
                 data: {
                 id: $(this).attr('id')
                 }
                 }).then(function(response){
                 $(this).disabled = true
-                console.log('saved')
+                console.log('deleted')
                 })
             })
     } );

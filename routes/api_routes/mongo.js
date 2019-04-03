@@ -25,4 +25,16 @@ module.exports = function(app, db) {
           res.json(err);
         });
     });
+
+    app.put("/delete-article/:id", function (req, res) {
+        db.Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false }, { new: true })
+          .then(function (response) {
+            console.log(response)
+            res.send("Article deleted!");
+          })
+          .catch(function (err) {
+            console.log(err);
+            res.send("Article has not been deleted");
+          }); 
+      });
 }
