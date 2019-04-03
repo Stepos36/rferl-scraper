@@ -12,6 +12,10 @@ var ArticleSchema = new Schema({
     required: true,
     unique: true
   },
+  time: {
+    type: String,
+    required: true
+  }
 });
 
 var Article = mongoose.model("Article", ArticleSchema);

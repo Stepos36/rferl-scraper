@@ -8,6 +8,7 @@
                     <th> </th>
                     <th>Article name</th>
                     <th>Article link</th>
+                    <th>Publication date</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                     <td class="details-control">+</td>
                     <td><h6>{{this.title}}</h6></td>
                     <td><a href='{{this.link}}'>go to RadioFreedom</a></td>
+                    <td>{{this.time}}</td>
 			    </tr>
 		        {{/each}}
             </tbody>
@@ -44,7 +46,7 @@
                 url: "/article-full",
                 method: "POST",
                 data: {
-                    link: tr.attr('data-id')
+                link: tr.attr('data-id')
                 }
             }).then(function(response){
                 if ( row.child.isShown() ) {
@@ -60,8 +62,20 @@
                     }
                     else {
                         var text = []
-                        for(var i=0;i<response.length;i++) {
+                        var videos = []
+                        for(var i=1;i<response.length;i++) {
+                            console.log(response[i])
+                            if ((response[i] == 'No media source currently available') || (response[i] == ' ')) {}
+                            else if(response[i].length && response[i]){
                             text.push(response[i])
+                            }
+                            else {}
+                        }
+                        for(var j=0;j<response[0][0].videos.length;j++){
+                            videos.push(response[0][0].videos[j])
+                        }
+                        for(var k=0;k<videos.length;k++) {
+                            text.push('<div class="text-center"><iframe src="https://www.rferl.org/embed/player/0/'+videos[k]+'.html?type=video" frameborder="0" scrolling="no" width="427" height="240" allowfullscreen></iframe></div>')
                         }
                         row.child(text).show();
                     }
