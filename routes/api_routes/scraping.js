@@ -12,14 +12,32 @@ module.exports = function(app, axios, cheerio, db) {
                 result.time = $(element).text()
                 return result.time
               })
-              return result.time
-            }).then(function() {
+              var textBlock =[]
+              var readingTime
+              var min
+              var sec
+              $('.wsw p').each(function(i, element) {
+                textBlockUnit = $(element).text()
+                textBlock.push(textBlockUnit)
+                textBlockString = JSON.stringify(textBlock)
+                console.log(textBlockString.length)
+                readingTime = (((textBlockString.length/4.79)/225)*60)
+                console.log(readingTime)
+                min = Math.floor(readingTime / 60)
+                sec = parseInt(readingTime - (60 * min))
+                result.readingTime = min + ' min ' + sec + ' sec'
+                console.log(result.readingTime)
+                return result.readingTime
+              })
               console.log(result)
             db.Article.create(result).then(function(dbArticle) {
               console.log(dbArticle);
             }).catch(function(err) {
               console.log(err);
             });
+              return result.readingTime, result.time
+            }).then(function() {
+              
             })
             
         });

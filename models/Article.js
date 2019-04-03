@@ -15,6 +15,9 @@ var ArticleSchema = new Schema({
   time: {
     type: String,
     required: true
+  },
+  readingTime: {
+    type: String
   }
 });
 
