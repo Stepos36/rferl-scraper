@@ -16,28 +16,23 @@ module.exports = function(app, axios, cheerio, db) {
               var readingTime
               var min
               var sec
+              result.readingTime = 'Video'
               $('.wsw p').each(function(i, element) {
-                textBlockUnit = $(element).text()
+                var textBlockUnit = $(element).text()
                 textBlock.push(textBlockUnit)
                 textBlockString = JSON.stringify(textBlock)
-                console.log(textBlockString.length)
-                readingTime = (((textBlockString.length/4.79)/225)*60)
-                console.log(readingTime)
+                result.summary = textBlockString.substring(2, 150)
+                readingTime = (((textBlockString.length/4.79)/235)*60)                
                 min = Math.floor(readingTime / 60)
                 sec = parseInt(readingTime - (60 * min))
                 result.readingTime = min + ' min ' + sec + ' sec'
-                console.log(result.readingTime)
                 return result.readingTime
               })
-              console.log(result)
-            db.Article.create(result).then(function(dbArticle) {
-              console.log(dbArticle);
+            db.Article.create(result).then(function(dbArticle) {  
             }).catch(function(err) {
-              console.log(err);
+              console.log(err)  
             });
               return result.readingTime, result.time
-            }).then(function() {
-              
             })
             
         });
@@ -55,20 +50,16 @@ module.exports = function(app, axios, cheerio, db) {
         $(".wsw p").each(function(i, element) {
             var text = $(element).text()
             result.push(text)
-            console.log(result)
         });
         $(".media-container video").each(function(i, element) {
           var videoId = $(element).attr('data-sdkid')
           videoIds.push(videoId)
-          console.log(result)
         });
         $(".wsw video").each(function(i, element) {
           var videoId = $(element).attr('data-sdkid')
           videoIds.push(videoId)
-          console.log(result)
         });
-        result[0].push({videos: videoIds})
-        
+        result[0].push({videos: videoIds})        
         }).then(function() {
           res.send(result)
         });

@@ -7,19 +7,19 @@
                 <tr>
                     <th> </th>
                     <th>Article name</th>
-                    <th>Article link</th>
                     <th>Reading est.</th>
                     <th>Publication date</th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
                 {{#each article}}
 			    <tr data-id={{this.link}}>
-                    <td class="details-control">+</td>
-                    <td><h6>{{this.title}}</h6></td>
-                    <td><a href='{{this.link}}'>go to RadioFreedom</a></td>
+                    <td class="details-control"><button>+</button></td>
+                    <td><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}</td>
                     <td>{{this.readingTime}}</td>
                     <td>{{this.time}}</td>
+                    <td><button id={{this.link}}>Save</button></td>
 			    </tr>
 		        {{/each}}
             </tbody>
@@ -27,7 +27,9 @@
                 <tr>
                     <th> </th>
                     <th>Article name</th>
-                    <th>Article link</th>
+                    <th>Reading est.</th>
+                    <th>Publication date</th>
+                    <th> </th>
                 </tr>
             </tfoot>
         </table>
@@ -67,8 +69,8 @@
                         var videos = []
                         for(var i=1;i<response.length;i++) {
                             console.log(response[i])
-                            if ((response[i] == 'No media source currently available') || (response[i] == ' ')) {}
-                            else if(response[i].length && response[i]){
+                            if ((response[i] == 'No media source currently available') || (response[i] == '') || (response[i] == ' ')) {}
+                            else if((response[i].length>10) && (response[i])){
                             text.push(response[i])
                             }
                             else {}
