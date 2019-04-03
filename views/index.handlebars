@@ -19,7 +19,7 @@
                     <td><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}</td>
                     <td>{{this.readingTime}}</td>
                     <td>{{this.time}}</td>
-                    <td><button id={{this.link}}>Save</button></td>
+                    <td><button class="save" id={{this._id}}>Save</button></td>
 			    </tr>
 		        {{/each}}
             </tbody>
@@ -86,9 +86,18 @@
                     tr.addClass('shown');
                 }
             })
-
-
-            
-        } );
+        });
+        $(document).on('click', '.save', function() {
+                $.ajax({
+                url: "/save-article/"+$(this).attr('id'),
+                method: "PUT",
+                data: {
+                id: $(this).attr('id')
+                }
+                }).then(function(response){
+                $(this).disabled = true
+                console.log('saved')
+                })
+            })
     } );
 </script>
