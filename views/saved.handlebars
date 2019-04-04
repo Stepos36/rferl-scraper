@@ -16,7 +16,7 @@
                 {{#each article}}
 			    <tr data-id={{this.link}}>
                     <td class="details-control"><button class="button-green">+</button></td>
-                    <td><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}</td>
+                    <td><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}<p><button class="button-blue">View notes()</button></p></td>
                     <td>{{this.readingTime}}</td>
                     <td>{{this.time}}</td>
                     <td><button class="button-red delete" id={{this._id}}>Delete</button></td>

@@ -21,7 +21,7 @@ module.exports = function(app, axios, cheerio, db) {
                 var textBlockUnit = $(element).text()
                 textBlock.push(textBlockUnit)
                 textBlockString = JSON.stringify(textBlock)
-                result.summary = textBlockString.substring(2, 150)
+                result.summary = textBlockString.substring(2, 150)+'...'
                 readingTime = (((textBlockString.length/4.79)/235)*60)                
                 min = Math.floor(readingTime / 60)
                 sec = parseInt(readingTime - (60 * min))
