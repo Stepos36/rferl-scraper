@@ -14,7 +14,7 @@ var routes = function(app, db) {
         
       });
     
-    app.get("/saved-articles", function (req, res) {
+    app.get("/saved", function (req, res) {
       db.Article.find({saved:true})
         .then(function(response) {
           if(response.length===0)
@@ -30,5 +30,15 @@ var routes = function(app, db) {
           res.json(err);
         });
       });
+
+    app.get("/article/:id", function (req, res) {
+      db.Article.findOne({ _id: req.params.id })
+    .populate("notes")
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    }).catch(function(err) {
+    res.json(err);
+    });
+});
 }
 module.exports = routes
