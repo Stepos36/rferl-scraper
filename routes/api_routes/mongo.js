@@ -42,7 +42,7 @@ module.exports = function(app, db) {
       db.Note.create(req.body).then(function(dbNote) {
         return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {notes: dbNote}}).then(function(dbArticle) {
           console.log(dbNote)
-          res.send('Note hase been added');
+          res.send('Note has been added');
         }).catch(function(err) {
           res.send('An error occurred while posting this note')
           res.json(err)

@@ -16,7 +16,7 @@
                 {{#each article}}
 			    <tr data-id={{this.link}}>
                     <td class="details-control"><button class="button-green">+</button></td>
-                    <td data-name="{{this.title}}"><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}<p><button id={{this._id}} class="button-blue btn comment" type="button" data-toggle="modal" data-target="#popupModalCenter">View notes()</button></p></td>
+                    <td data-name="{{this.title}}"><h5><a href='{{this.link}}'>{{this.title}}</a></h5>{{this.summary}}<p><button id={{this._id}} class="button-blue btn comment" type="button" data-toggle="modal" data-target="#popupModalCenter">View notes({{this.notes.length}})</button></p></td>
                     <td>{{this.readingTime}}</td>
                     <td>{{this.time}}</td>
                     <td><button class="button-green save" id={{this._id}}>Save</button></td>
@@ -46,9 +46,8 @@
       </div>
       <div class="modal-body">
         <p class="mt-2 mb-0">Notes:</p>
-        <div class="comments card" style="min-height: 50px; padding:5px"><p class="font-italic">This article doesn't have any notes yet.</p></div>
+        <div class="comments card" style="min-height: 50px; padding:5px"></div>
         <div class="p-1">
-            <hr>
             <p class="mt-2 mb-0">Create new note:</p>
             <div class="mt-1 input-group">
                 <input id="newNoteTitle" type="text" class="form-control" placeholder="Note title">
@@ -136,10 +135,13 @@
                 method: "GET",
                 url: '/article/' + $(this).attr('id'),
             }).then(function(response) {
-                console.log(response)
-                for(var i=0;i<response.notes.length;i++) {
-                    $('.comments').append('<div>Title #'+(i+1)+': '+response.notes[i].title+'</div>')
+                if(response.notes) {
+                    renderModalContent(response)
                 }
+                else {
+                    $('.comments').html('')
+                }
+                console.log(response)      
             })
         })
         $(document).on('click', '#saveNote', function() {
@@ -151,8 +153,29 @@
                 body: $('#newNoteBody').val()
                 }
                 }).then(function(response){
-                console.log('Note added')
+                    $.ajax({
+                method: "GET",
+                url: '/article/' + $(this)[0].url.substring(10)
+            }).then(function(response) {
+                console.log(response)
+                if(response.notes) {
+                    renderModalContent(response)
+                }
+                else {}
+            })
                 })
         })
     } );
+    function renderModalContent(response) {
+        $('#newNoteTitle').val('')
+        $('#newNoteBody').val('')
+        $('.comments').html("<p class='font-italic'>This article doesn't have any notes yet.</p>")
+        for(var i=0;i<response.notes.length;i++) {
+        $('.comments').append('<h6>'+response.notes[i].title+'</h6>')
+        $('.comments').append('<p>'+response.notes[i].body+'</p>' )
+        var timestamp = response.notes[i]._id.toString().substring(0,8)
+        var dateTime = (new Date( parseInt( timestamp, 16 ) * 1000 )).toString()
+        $('.comments').append('<p class="font-italic ml-auto mb-0">'+dateTime.substring(0,24)+'<p>').append('<hr class="mt-0">')
+        }
+    }
 </script>

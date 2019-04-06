@@ -1,4 +1,4 @@
-var routes = function(app, db) {
+var routes = function(app, db, exphbs) {
     app.get("/", function (req, res) {
       db.Article.find().sort({_id:-1}).
       exec(function (error, response) {
