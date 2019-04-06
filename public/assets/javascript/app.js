@@ -119,8 +119,8 @@ $(document).ready( function () {
 function renderModalContent(response) {
     $('#newNoteTitle').val('')
     $('#newNoteBody').val('')
+    $('.comments').html('')
     if(response.notes.length == 0) {
-        $('.comments').html('')
         $('.comments').html("<p class='font-italic'>This article doesn't have any notes yet.</p>")
     }
     else {

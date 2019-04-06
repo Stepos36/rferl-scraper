@@ -125,3 +125,41 @@ hr {
     border-width: 1px 0;
     margin: 18px 0;
   }
+
+#ff {
+    width: 50vw
+}
+
+.navbar {
+    background-color: rgba(235,105,0, 0.5);
+    padding: 0.3% 0;
+    font-size: 1,2em;
+    min-height: 70px
+}
+
+.navbar-list {
+    text-align: center
+}
+.nav-link {
+    color:black !important;
+    font-size:1.6rem;
+    margin-right:0.5vw;
+}
+.nav-link:hover {
+    color: rgb(0,118,37) !important
+}
+
+body {
+    background: url(../images/bg.jpg) center center;
+    display: table;
+    height: 100%;
+    position: relative;
+    width:100%;
+    -webkit-background-size: cover;
+   -moz-background-size: cover;
+}
+
+.jumbotron {
+    background-color: rgba(255,255,255, 0.4) !important
+}
+

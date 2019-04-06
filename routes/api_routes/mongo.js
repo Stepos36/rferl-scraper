@@ -26,6 +26,22 @@ module.exports = function(app, db) {
         });
     });
 
+    app.get("/api/articles", function(req, res) {
+      db.Article.find({})
+      .populate("notes")
+        .then(function(response) {
+          if(response.length===0)
+          {
+            res.send("Your database is empty");
+          }
+          else{
+          res.json(response);
+          }
+        }).catch(function(err) {
+          res.json(err);
+        });
+    });
+
     app.put("/delete-article/:id", function (req, res) {
         db.Article.findOneAndUpdate({ _id: req.params.id }, { "saved": false }, { new: true })
           .then(function (response) {

@@ -16,12 +16,30 @@
 		<title>Radio Freedom news scraper</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+          <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto navbar-list">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/saved">Saved Articles</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="/api/articles">Api</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
 		<div class="mx-auto topbar">
     		<div class="nav justify-content-center topbar">
         		<a href="/"><img id="ff" src="/assets/images/logo.png"></a>
    			</div>    
 		</div>
-		<div id="page-content">
+		<div class="jumbotron" id="page-content">
 			{{{ body }}}
 		</div>
 		<footer>
