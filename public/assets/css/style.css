@@ -127,7 +127,8 @@ hr {
   }
 
 #ff {
-    width: 50vw
+    width: 50vw;
+    margin-top: 70px
 }
 
 .navbar {
@@ -186,3 +187,11 @@ td {
 .navbar-list .button-green:hover {
     color: white !important
 }
+footer {
+    background-color:  rgb(171,223,255);
+    color: black;
+    font-size: 17px;
+    text-align: center;
+    height: 30px;
+    margin-top: -15px;
+  }
