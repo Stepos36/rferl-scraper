@@ -1,4 +1,4 @@
-table .button-green {
+.button-green {
     display: inline-block;
     text-align: center;
     vertical-align: middle;
@@ -18,8 +18,8 @@ table .button-green {
     text-decoration: none;
     outline: none;
 }
-table .button-green:hover,
-table .button-green:focus {
+.button-green:hover,
+.button-green:focus {
     border: 2px solid #025c08;
     background: #04b010;
     background: -webkit-gradient(linear, left top, left bottom, from(#04b010), to(#025e08));
@@ -29,7 +29,7 @@ table .button-green:focus {
     text-decoration: none;
     outline: none;
 }
-table .button-green:active {
+.button-green:active {
     background: #024e07;
     background: -webkit-gradient(linear, left top, left bottom, from(#024e07), to(#024e07));
     background: -moz-linear-gradient(top, #024e07, #024e07);
@@ -182,4 +182,7 @@ td {
 }
 .welcome, .nav-link {
     font-family: 'Righteous', cursive;
+}
+.navbar-list .button-green:hover {
+    color: white !important
 }

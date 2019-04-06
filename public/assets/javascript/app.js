@@ -115,6 +115,22 @@ $(document).ready( function () {
         }
         else {$(this).parent().html('<button class="button-red saveButton delete" id={{this._id}}>Delete</button>')}
     })
+    $(document).on('click', '.scrape', function() {
+        $.ajax({
+            method: "GET",
+            url: '/scrape'
+        }).then(function(response) {
+            if(response) {
+                $('.scrapingStatus').text('Scraping went succesful! We got all the required data.')
+            }
+            else {
+                $('.scrapingStatus').text('An error occurred while scraping')
+            }
+        })
+    })
+    $(document).on('click', '#finishScrape', function() {
+        location.reload()
+    })
 } );
 function renderModalContent(response) {
     $('#newNoteTitle').val('')

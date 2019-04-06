@@ -34,7 +34,7 @@
             </tfoot>
         </table>
     </div>
-<!-- Modal -->
+<!-- Modals -->
 <div class="modal fade" id="popupModalCenter" tabindex="-1" role="dialog" aria-labelledby="popupModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -60,6 +60,26 @@
       <div class="modal-footer">
         <button type="button" id="saveNote" class="btn btn-primary">Add new comment</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="scrapeModalCenter" tabindex="-1" role="dialog" aria-labelledby="scrapeModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="scrapeModalLongTitle">Scraping process</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+            <h4 class="font-italic scrapingStatus"></h4>
+        </div>
+        <div class="text-center"><button type="button" id="finishScrape" class="btn btn-primary">Finish scraping and reload page</button></div>
+        </div>    
       </div>
     </div>
   </div>
