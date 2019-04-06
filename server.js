@@ -27,7 +27,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/rferl" ;
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 require("./routes/api_routes/scraping")(app, axios, cheerio, db);
-require("./routes/html_routes/routes")(app, db);
+require("./routes/html_routes/routes")(app, db, exphbs);
 require("./routes/api_routes/mongo")(app, db);
 
 app.listen(PORT, function() {

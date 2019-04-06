@@ -7,7 +7,10 @@ var routes = function(app, db, exphbs) {
             }
             else {
               res.render("index", {
-                article: response
+                article: response,
+                helpers: {
+                  saved: function () { if (this.saved==true) {return true} else { return false}}
+              }
               });
             }
           });
@@ -22,7 +25,7 @@ var routes = function(app, db, exphbs) {
             res.send("You didn't save any articles yet!");
           }
           else{
-          res.render("saved", {
+          res.render("index", {
             article: response
           });
           }
