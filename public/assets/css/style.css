@@ -150,16 +150,36 @@ hr {
 }
 
 body {
-    background: url(../images/bg.jpg) center center;
+    background: url(../images/bg.jpg) center center fixed;
     display: table;
     height: 100%;
     position: relative;
     width:100%;
     -webkit-background-size: cover;
    -moz-background-size: cover;
+   font-family: 'Noto Serif', serif;
 }
 
 .jumbotron {
     background-color: rgba(255,255,255, 0.4) !important
 }
 
+td {
+    padding-left:1rem !important;
+    padding-right:0.7rem !important;
+    padding-top:0.3rem !important;
+    padding-bottom:0.3rem !important
+}
+
+#articlesTable_wrapper{
+    padding:0.7rem;
+    background-color: rgb(171,223,255);
+    border: 1px black solid;
+    border-radius: 3px
+}
+#articlesTable {
+    border: 1px black solid;
+}
+.welcome, .nav-link {
+    font-family: 'Righteous', cursive;
+}
